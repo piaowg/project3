@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+
+        }
+        img{
+            vertical-align: top;
+        }
+         #box{
+             width: 600px;
+             border: 1px solid #090;
+             margin: 0 auto;
+             position: relative;
+         }
+         #focus{
+             position: absolute;
+             top: 350px;
+             left: 230px;
+             text-align: center;
+         }
+         #focus span{
+             display: inline-block;
+             width: 16px;
+             height: 16px;
+             margin-left: 10px;
+             background: url(images/dot.png);
+             cursor: pointer;
+         }
+    </style>
+    <script>
+        window.onload=function (){
+            function $(id){
+                return document.getElementById(id);
+            }
+            //获取dom对象
+            var box =$("box");
+            var imgs=$("imgs");
+            var focus=$("foucs");
+            var spans = document.getElementsByTagName("span");
+//啊哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈
+            var cuerr;
+            //循环绑定每个按钮
+            for(var i=0;i<spans.length;i++){
+                spans[i].index=i;
+                spans[i].onclick=function(){
+                    for(var j=0;j<spans.length;j++){
+                        spans[j].style.background="url(images/dot.png)";
+                    }
+                    this.style.background="url(images/dotActive.png)";
+
+                    cuerr=this.index;
+
+                    if (window.addEventListener){
+                        //IE9+
+                        imgs.firstElementChild.firstElementChild.src="images/"+(this.index+1)+".jpg";
+                        imgs.firstElementChild.href=this.index+1+".html";
+                    }else{
+                        //IE6/7/8
+                        imgs.firstChild.firstChild.src="images/"+(this.index+1)+".jpg";
+                        imgs.firstChild.href=this.index+1+".html";
+                    }
+                }
+            }
+            var k=1;
+            //设置一个定时器
+            var sid =setInterval(function(){
+                for (var j=0;j<spans.length;j++){
+                    spans[j].style.background="url(images/dot.png)"
+                }
+                if(cuerr!=undefined){
+                    k=cuerr;
+                    cuerr=undefined;
+                }
+                spans[k].style.background="url(images/dotActive.png)";
+
+                if (window.addEventListener){
+                    //IE9+
+                    imgs.firstElementChild.firstElementChild.src="images/"+(k+1)+".jpg";
+                    imgs.firstElementChild.href=k+1+".html";
+                }else{
+                    //IE6/7/8
+                    imgs.firstChild.firstChild.src="images/"+(k+1)+".jpg";
+                    imgs.firstChild.href=k+1+".html";
+                }
+                if (k>=4){
+                    k=-1;
+                }
+                k++;
+            },2000)
+        }
+    </script>
+</head>
+<body>
+   <div id="box">
+       <div id="imgs">
+           <a href="1.html">
+               <img src="images/1.jpg" alt="">
+           </a>
+       </div>
+       <div id="focus">
+           <span class="s1" style="background: url(images/dotActive.png)"></span>
+           <span class="s2" ></span>
+           <span class="s3" ></span>
+           <span class="s4" ></span>
+           <span class="s1" ></span>
+       </div>
+   </div>
+</body>
+</html>
